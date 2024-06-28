@@ -82,24 +82,21 @@ let usedSeconds = [];
 
 function getSeconds(){
     while(true){
-        second = Math.floor(Math.random()*10)
+        second = Math.floor(Math.random()*10);
         
-        if(usedSeconds.length == 10){
+        if (usedSeconds.length == 10){
             usedSeconds = [];
-            console.log(`full array, resetting ${usedSeconds.length}`)
-        }
-        else if(second == 9){
+            console.log(`full array, resetting ${usedSeconds.length}`);
+        } else if (second == 9){
             usedSeconds = [];
-            console.log(`got number ${second}, reseting array`)
-        }
-        else if(usedSeconds.includes(second)){
+            console.log(`got number ${second}, reseting array`);
+        } else if (usedSeconds.includes(second)){
             console.log(`number ${second} already in array`);
-            console.log(usedSeconds)
-        }
-        else{
+            console.log(usedSeconds);
+        } else {
             usedSeconds.push(second);
-            console.log(`new number: ${second}`)
-            console.log(usedSeconds)
+            console.log(`new number: ${second}`);
+            console.log(usedSeconds);
             return second;
         }
     }
