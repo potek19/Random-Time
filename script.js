@@ -1,69 +1,71 @@
 let usedSeconds = [];
 let usedMinutes = [];
 let usedHours = [];
+const clockNow = new Date();
+document.getElementById(`clock`).textContent = clockNow.toTimeString().split(' ')[0];
+let second = clockNow.getSeconds().toString().padStart(2, `0`);
+let minute = clockNow.getMinutes().toString().padStart(2, `0`);
+let hour = clockNow.getHours().toString().padStart(2, `0`);
 
 
 function getSeconds(){
     while(true){
-        let second = Math.floor(Math.random() * 10);
-        if (usedSeconds.length === 10) {
+        second = Math.floor(Math.random() * 61).toString().padStart(2, `0`);
+        if (usedSeconds.length == 61) {
             usedSeconds = [];
             getMinutes();
-            // Call getMinutes function here
-            // console.log(`full array, resetting ${usedSeconds.length}`);
-        } else if (second === 9) {
+        } else if (second == 60) {
             usedSeconds = [];
             getMinutes();
-            // Call getMinutes function here
-            // console.log(`got number ${second}, resetting array`);
         } else if (usedSeconds.includes(second)) {
-            // console.log(`number ${second} already in array`);
-            // console.log(usedSeconds);
         } else {
             usedSeconds.push(second);
-            console.log(`Second: ${second}, in array ${usedSeconds}`);
-            return second;
+            console.log(`seconds: ` + usedSeconds);
+            // let newClock = `${hour}:${minute}:${second}`;
+            // console.log(newClock);
+            break;
         }
     }
 }
 
 function getMinutes(){
     while(true){
-        let minute = Math.floor(Math.random() * 10);
-        if (usedMinutes.length === 10) {
+        minute = Math.floor(Math.random() * 61).toString().padStart(2, `0`);
+        if (usedMinutes.length == 61) {
             usedMinutes = [];
             getHours();
-            // console.log(`full array, resetting ${usedSeconds.length}`);
-        } else if (minute === 9) {
+        } else if (minute == 60) {
             usedMinutes = [];
             getHours();
-            // console.log(`got number ${second}, resetting array`);
-        } else if (usedMinutes.includes(minute)) { // Number already in array, runs .random again
+        } else if (usedMinutes.includes(minute)) {
         } else {
             usedMinutes.push(minute);
-            console.log(`Minute: ${minute}, in array ${usedMinutes}`);
+            console.log(`minutes: ` + usedMinutes);
             return minute;
         }
     }
 }
 
-
-
-setInterval(getSeconds, 1000);
-
 function getHours(){
     while(true){
-        let hour = Math.floor(Math.random() * 10);
-        if (usedHours.length === 10) {
+        hour = Math.floor(Math.random() * 24).toString().padStart(2, `0`);
+        if (usedHours.length == 24) {
             usedHours = [];
-        } else if (usedHours.includes(hour)) { // Number already in array, runs .random again
+        } else if (usedHours.includes(hour)) {
         } else {
             usedHours.push(hour);
-            console.log(`Hour: ${hour}, in array ${usedHours}`);
+            console.log(`hours: ` + usedHours);
             return hour;
         }
     }
 }
 
+function updateClock(){
+    getSeconds();
+    let newClock = `${hour}:${minute}:${second}`
+    document.getElementById(`clock`).textContent = newClock;
+}
 
 
+
+setInterval(updateClock, 1000);
